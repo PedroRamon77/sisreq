@@ -1,377 +1,326 @@
-/* =========================
-   RESET
-========================= */
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
 }
 
-/* =========================
-   PAGE
-========================= */
-
-.requerimento-page {
-  min-height: 100vh;
-  background: #f5f7fb;
-  font-family: 'Inter', sans-serif;
-  color: #111827;
-
-  padding: 32px;
+.requerimento-page{
+min-height:100vh;
+background:#f5f7fb;
+font-family:'Inter',sans-serif;
+color:#111827;
+padding:32px;
 }
 
-/* =========================
-   BACK LINK
-========================= */
-
-.back-link {
-  max-width: 1400px;
-  margin: 0 auto 20px;
+.back-link{
+max-width:1400px;
+margin:0 auto 24px;
 }
 
-.back-link a {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-
-  width: fit-content;
-
-  text-decoration: none;
-
-  color: #00b300;
-  font-weight: 700;
-  font-size: 0.95rem;
-
-  transition: 0.2s ease;
+.back-button{
+display:inline-flex;
+align-items:center;
+gap:12px;
+padding:12px 18px;
+background:#fff;
+border:1px solid #16a34a;
+border-radius:12px;
+text-decoration:none;
+color:#16a34a;
+font-size:.95rem;
+font-weight:700;
+transition:.2s;
 }
 
-.back-link a:hover {
-  color: #008000;
+.back-button:hover{
+background:#16a34a;
+color:#fff;
 }
 
-/* =========================
-   CARD
-========================= */
-
-.requerimento-card {
-  max-width: 1400px;
-  margin: 0 auto;
-
-  background: #ffffff;
-  border-radius: 28px;
-
-  padding: 32px;
-
-  position: relative;
-  overflow: hidden;
+.back-arrow{
+width:30px;
+height:30px;
+border-radius:50%;
+display:flex;
+align-items:center;
+justify-content:center;
+background:#dcfce7;
+font-size:1rem;
+transition:.2s;
 }
 
-.requerimento-card::before {
-  content: '';
-  position: absolute;
-
-  top: 0;
-  left: 0;
-
-  width: 6px;
-  height: 100%;
-
-  background: #00b300;
+.back-button:hover .back-arrow{
+background:rgba(255,255,255,.18);
 }
 
-/* =========================
-   HEADER
-========================= */
-
-.form-header {
-  margin-bottom: 28px;
+.requerimento-card{
+max-width:1400px;
+margin:0 auto;
+background:#fff;
+border:1px solid #16a34a;
+border-radius:18px;
+padding:36px;
 }
 
-.form-title {
-  font-size: 2rem;
-  font-weight: 800;
-
-  color: #111827;
-
-  margin-bottom: 10px;
+.form-header{
+margin-bottom:32px;
+padding-bottom:20px;
+border-bottom:1px solid #e5e7eb;
 }
 
-.form-subtitle {
-  font-size: 0.96rem;
-  line-height: 1.6;
-
-  color: #4b5563;
+.form-title{
+font-size:2rem;
+font-weight:800;
+color:#16a34a;
+margin-bottom:8px;
 }
 
-/* =========================
-   GRID
-========================= */
-
-.form-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 20px;
+.form-subtitle{
+font-size:.95rem;
+line-height:1.6;
+color:#4b5563;
 }
 
-.full {
-  grid-column: span 2;
+.form-grid{
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:22px;
 }
 
-/* =========================
-   INPUT GROUP
-========================= */
-
-.input-group {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
+.full{
+grid-column:span 2;
 }
 
-.input-label {
-  font-size: 0.94rem;
-  font-weight: 700;
-  color: #008000;
+.input-group{
+display:flex;
+flex-direction:column;
+gap:8px;
 }
 
-/* =========================
-   INPUTS
-========================= */
+.input-label{
+font-size:.9rem;
+font-weight:700;
+color:#15803d;
+}
 
 .input,
 .select,
-.textarea {
-  width: 100%;
-
-  border: none;
-  outline: none;
-
-  background: #f8fafc;
-
-  border-radius: 16px;
-
-  font-size: 0.95rem;
-  color: #111827;
-
-  transition: 0.2s ease;
+.textarea{
+width:100%;
+background:#fff;
+border:1px solid #d1d5db;
+border-radius:12px;
+font-size:.95rem;
+color:#111827;
+transition:.2s;
+outline:none;
 }
 
 .input,
-.select {
-  height: 54px;
-  padding: 0 16px;
+.select{
+height:52px;
+padding:0 16px;
 }
 
-.textarea {
-  min-height: 150px;
-  resize: vertical;
+.textarea{
+padding:16px;
+min-height:160px;
+resize:vertical;
+line-height:1.6;
+}
 
-  padding: 16px;
-  line-height: 1.6;
+.input:hover,
+.select:hover,
+.textarea:hover{
+border-color:#16a34a;
 }
 
 .input:focus,
 .select:focus,
-.textarea:focus {
-  background: #00800023;
+.textarea:focus{
+border-color:#16a34a;
+box-shadow:0 0 0 4px rgba(22,163,74,.12);
 }
 
-.input:disabled {
-  background: #eef2f7;
-  color: #6b7280;
-  cursor: not-allowed;
+.input:disabled{
+background:#f3f4f6;
+color:#6b7280;
+cursor:not-allowed;
 }
 
-/* =========================
-   SELECT
-========================= */
-
-.select {
-  cursor: pointer;
+.select{
+cursor:pointer;
 }
 
-/* =========================
-   UPLOAD
-========================= */
-
-.upload-area {
-  width: 100%;
-
-  border: 2px dashed #00b300;
-  border-radius: 20px;
-
-  background: #f8fafc;
-
-  padding: 26px 20px;
-
-  cursor: pointer;
-
-  transition: 0.2s ease;
+.upload-area{
+display:flex;
+align-items:center;
+gap:18px;
+padding:22px;
+border:2px dashed #16a34a;
+border-radius:14px;
+background:#fafafa;
+cursor:pointer;
+transition:.2s;
 }
 
-.upload-area:hover {
-  background: #00800023;
+.upload-area:hover{
+background:#f0fdf4;
+border-color:#15803d;
 }
 
-.upload-content {
-  display: flex;
-  align-items: center;
-  gap: 18px;
+.upload-content{
+display:flex;
+align-items:center;
+gap:18px;
+width:100%;
 }
 
-.upload-icon {
-  width: 64px;
-  height: 64px;
-
-  border-radius: 18px;
-
-  background: #00800023;
-  color: #008000;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.upload-icon{
+width:62px;
+height:62px;
+border-radius:14px;
+background:#dcfce7;
+display:flex;
+align-items:center;
+justify-content:center;
+color:#16a34a;
+flex-shrink:0;
 }
 
-.upload-title {
-  font-size: 1rem;
-  font-weight: 700;
-  color: #111827;
-
-  margin-bottom: 4px;
+.upload-title{
+font-size:1rem;
+font-weight:700;
+color:#111827;
+margin-bottom:4px;
+word-break:break-word;
 }
 
-.upload-subtitle {
-  font-size: 0.9rem;
-  color: #6b7280;
+.upload-subtitle{
+font-size:.9rem;
+color:#6b7280;
 }
 
-/* =========================
-   ACTIONS
-========================= */
-
-.form-actions {
-  display: flex;
-  justify-content: flex-end;
-  gap: 14px;
-
-  margin-top: 32px;
+.form-actions{
+display:flex;
+justify-content:flex-end;
+gap:14px;
+margin-top:35px;
 }
 
 .btn-cancelar,
-.btn-enviar {
-  height: 50px;
-  padding: 0 22px;
-
-  border: none;
-  border-radius: 14px;
-
-  font-size: 0.95rem;
-  font-weight: 700;
-
-  cursor: pointer;
-
-  transition: 0.2s ease;
+.btn-enviar{
+height:52px;
+padding:0 24px;
+border-radius:12px;
+font-size:.95rem;
+font-weight:700;
+cursor:pointer;
+transition:.2s;
 }
 
-/* CANCELAR */
-
-.btn-cancelar {
-  background: #ffffff;
-  color: #ff0000;
-
-  border: 2px solid #ff0000;
+.btn-cancelar{
+background:#fff;
+border:1px solid #ef4444;
+color:#ef4444;
 }
 
-.btn-cancelar:hover {
-  background: #ff0000;
-  color: #ffffff;
+.btn-cancelar:hover{
+background:#ef4444;
+color:#fff;
 }
 
-/* ENVIAR */
-
-.btn-enviar {
-  background: rgb(255, 255, 255);
-  color: #008000;
-
-  border: 2px solid #008000
+.btn-enviar{
+background:#fff;
+border:2px solid #16a34a;
+color: #16a34a;
 }
 
-.btn-enviar:hover {
-  background: #008000;
-  color: #ffffff;
+.btn-enviar:hover{
+background:#16a34a;
+color:#fff;
 }
 
-/* =========================
-   RESPONSIVO
-========================= */
-
-@media (max-width: 992px) {
-
-  .form-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .full {
-    grid-column: span 1;
-  }
+.btn-enviar:disabled{
+opacity:.7;
+cursor:not-allowed;
+box-shadow:none;
 }
 
-@media (max-width: 768px) {
+@media(max-width:992px){
 
-  .requerimento-page {
-    padding: 22px 16px;
-  }
-
-  .requerimento-card {
-    padding: 22px;
-  }
-
-  .form-title {
-    font-size: 1.7rem;
-  }
-
-  .form-actions {
-    flex-direction: column;
-  }
-
-  .btn-cancelar,
-  .btn-enviar {
-    width: 100%;
-  }
-
-  .upload-content {
-    flex-direction: column;
-    text-align: center;
-  }
+.form-grid{
+grid-template-columns:1fr;
 }
 
-@media (max-width: 420px) {
+.full{
+grid-column:span 1;
+}
 
-  .requerimento-page {
-    padding: 16px 12px;
-  }
+}
 
-  .requerimento-card {
-    padding: 18px;
-    border-radius: 22px;
-  }
+@media(max-width:768px){
 
-  .form-title {
-    font-size: 1.5rem;
-  }
+.requerimento-page{
+padding:20px;
+}
 
-  .input,
-  .select {
-    height: 48px;
-  }
+.requerimento-card{
+padding:24px;
+}
 
-  .textarea {
-    min-height: 120px;
-  }
+.form-title{
+font-size:1.7rem;
+}
 
-  .upload-icon {
-    width: 54px;
-    height: 54px;
-  }
+.upload-content{
+flex-direction:column;
+text-align:center;
+}
+
+.form-actions{
+flex-direction:column;
+}
+
+.btn-cancelar,
+.btn-enviar{
+width:100%;
+}
+
+}
+
+@media(max-width:480px){
+
+.requerimento-page{
+padding:16px;
+}
+
+.requerimento-card{
+padding:18px;
+border-radius:16px;
+}
+
+.form-title{
+font-size:1.5rem;
+}
+
+.input,
+.select{
+height:48px;
+}
+
+.textarea{
+min-height:130px;
+}
+
+.upload-icon{
+width:54px;
+height:54px;
+}
+
+.back-button{
+width:100%;
+justify-content:center;
+}
+
 }

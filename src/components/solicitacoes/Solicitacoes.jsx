@@ -147,23 +147,23 @@ export default function Solicitacoes() {
                 Todos os Status
               </option>
 
-              <option value="ABERTO">
+              <option value="Aberto">
                 Aberto
               </option>
 
-              <option value="EM_ANALISE">
+              <option value="Em analise">
                 Em análise
               </option>
 
-              <option value="AGUARDANDO_AJUSTE">
+              <option value="Aguardando Ajuste">
                 Aguardando ajuste
               </option>
 
-              <option value="DEFERIDO">
+              <option value="Deferido">
                 Deferido
               </option>
 
-              <option value="INDEFERIDO">
+              <option value="Indeferido">
                 Indeferido
               </option>
 

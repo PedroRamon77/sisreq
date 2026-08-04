@@ -21,168 +21,125 @@ const UploadIcon = () => (
 );
 
 export default function NovoRequerimento() {
-
   const navigate = useNavigate();
 
-  const [semestre,setSemestre] = useState("");
-  const [curso,setCurso] = useState("");
-  const [tipo,setTipo] = useState("");
-  const [descricao,setDescricao] = useState("");
-  const [anexo,setAnexo] = useState(null);
-  const [loading,setLoading] = useState(false);
+  const hoje = new Date();
 
-  const usuario = JSON.parse(
-    localStorage.getItem("usuario")
-  );
+  const semestreAtual =
+    hoje.getMonth() < 6
+      ? `${hoje.getFullYear()}.1`
+      : `${hoje.getFullYear()}.2`;
 
+  const [semestre] = useState(semestreAtual);
+  const [curso, setCurso] = useState("");
+  const [tipo, setTipo] = useState("");
+  const [descricao, setDescricao] = useState("");
+  const [anexo, setAnexo] = useState(null);
+  const [loading, setLoading] = useState(false);
+
+  const usuario = JSON.parse(localStorage.getItem("usuario"));
 
   const cancelar = () => {
     navigate("/dashboardaluno");
   };
 
-
-  async function enviar(e){
-
+  async function enviar(e) {
     e.preventDefault();
 
-    try{
-
+    try {
       setLoading(true);
 
       const formData = new FormData();
 
-      formData.append("tipo",tipo);
-      formData.append("descricao",descricao);
-      formData.append("semestreAtual",semestre);
-      formData.append("cursoAtual",curso);
+      formData.append("tipo", tipo);
+      formData.append("descricao", descricao);
+      formData.append("semestreAtual", semestre);
+      formData.append("cursoAtual", curso);
 
-      if(anexo){
-        formData.append("anexos",anexo);
+      if (anexo) {
+        formData.append("anexos", anexo);
       }
 
-
-      await api.post(
-        "/requerimentos",
-        formData,
-        {
-          headers:{
-            "Content-Type":"multipart/form-data"
-          }
+      await api.post("/requerimentos", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data"
         }
-      );
-
+      });
 
       alert("Requerimento enviado com sucesso!");
-
       navigate("/dashboardaluno");
-
-
-    }catch(error){
-
+    } catch (error) {
       alert(
         error.response?.data?.erro ||
-        "Erro ao enviar requerimento"
+          "Erro ao enviar requerimento."
       );
-
-    }finally{
-
+    } finally {
       setLoading(false);
-
     }
-
   }
 
-
   return (
-
     <div className="requerimento-page">
-
       <div className="back-link">
-
-        <Link to="/dashboardaluno">
-          ← Voltar ao Painel
+        <Link
+          to="/dashboardaluno"
+          className="back-button"
+        >
+          <span className="back-arrow">←</span>
+          <span>Voltar ao Painel</span>
         </Link>
-
       </div>
 
-
       <div className="requerimento-card">
-
         <div className="form-header">
-
           <h1 className="form-title">
             Novo Requerimento
           </h1>
 
           <p className="form-subtitle">
-            Confirme seus dados e preencha a solicitação acadêmica.
+            Confira seus dados e preencha as informações abaixo para registrar sua solicitação acadêmica.
           </p>
-
         </div>
 
-
         <form onSubmit={enviar}>
-
-
           <div className="form-grid">
-
-
             <div className="input-group">
-
-              <label>
+              <label className="input-label">
                 Matrícula
               </label>
 
               <input
                 className="input"
+                value={usuario?.matricula || ""}
                 disabled
-                value={
-                  usuario?.matricula || ""
-                }
               />
-
             </div>
 
-
-
             <div className="input-group">
-
-              <label>
+              <label className="input-label">
                 Semestre Atual
               </label>
 
               <input
                 className="input"
-                placeholder="Ex: 2026.1"
                 value={semestre}
-                onChange={
-                  e=>setSemestre(e.target.value)
-                }
-                required
+                disabled
               />
-
             </div>
 
-
-
             <div className="input-group full">
-
-              <label>
+              <label className="input-label">
                 Curso Atual
               </label>
-
 
               <select
                 className="select"
                 value={curso}
-                onChange={
-                  e=>setCurso(e.target.value)
-                }
+                onChange={(e) => setCurso(e.target.value)}
                 required
               >
-
                 <option value="">
-                  Selecione
+                  Selecione o curso
                 </option>
 
                 <option>
@@ -196,30 +153,22 @@ export default function NovoRequerimento() {
                 <option>
                   Engenharia Mecânica
                 </option>
-
               </select>
-
             </div>
 
-
-
             <div className="input-group full">
-
-              <label>
-                Tipo de solicitação
+              <label className="input-label">
+                Tipo de Solicitação
               </label>
 
               <select
                 className="select"
                 value={tipo}
-                onChange={
-                  e=>setTipo(e.target.value)
-                }
+                onChange={(e) => setTipo(e.target.value)}
                 required
               >
-
                 <option value="">
-                  Selecione
+                  Selecione o tipo de solicitação
                 </option>
 
                 <option>
@@ -237,66 +186,58 @@ export default function NovoRequerimento() {
                 <option>
                   Segunda Chamada
                 </option>
-
               </select>
-
             </div>
 
-
-
             <div className="input-group full">
-
-              <label>
+              <label className="input-label">
                 Descrição
               </label>
 
               <textarea
                 className="textarea"
+                placeholder="Descreva detalhadamente sua solicitação..."
                 value={descricao}
-                onChange={
-                  e=>setDescricao(e.target.value)
-                }
+                onChange={(e) => setDescricao(e.target.value)}
                 required
               />
-
             </div>
 
-
-
             <div className="input-group full">
-
-              <label>
-                Anexo
+              <label className="input-label">
+                Documento Anexado
               </label>
 
               <label className="upload-area">
+                <div className="upload-content">
+                  <div className="upload-icon">
+                    <UploadIcon />
+                  </div>
 
-                <UploadIcon/>
+                  <div>
+                    <div className="upload-title">
+                      {anexo
+                        ? anexo.name
+                        : "Clique para selecionar um arquivo"}
+                    </div>
+
+                    <div className="upload-subtitle">
+                      PDF, PNG, JPG ou JPEG
+                    </div>
+                  </div>
+                </div>
 
                 <input
                   hidden
                   type="file"
                   accept=".pdf,.png,.jpg,.jpeg"
-                  onChange={
-                    e=>setAnexo(e.target.files[0])
-                  }
+                  onChange={(e) => setAnexo(e.target.files[0])}
                 />
-
-                {anexo
-                  ? anexo.name
-                  : "Clique para anexar"}
-
               </label>
-
             </div>
-
-
           </div>
 
-
-
           <div className="form-actions">
-
             <button
               type="button"
               className="btn-cancelar"
@@ -305,30 +246,17 @@ export default function NovoRequerimento() {
               Cancelar
             </button>
 
-
             <button
               className="btn-enviar"
               disabled={loading}
             >
-
               {loading
                 ? "Enviando..."
                 : "Enviar Solicitação"}
-
             </button>
-
-
           </div>
-
-
         </form>
-
-
       </div>
-
-
     </div>
-
   );
-
 }

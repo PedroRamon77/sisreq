@@ -251,19 +251,19 @@ color:#ca8a04;
 /* AGUARDANDO AJUSTE */
 .status-badge.aguardando_ajuste{
 background:#fef3c7;
-color:#d97706;
+color:#f88400;
 }
 
 /* DEFERIDO */
 .status-badge.deferido{
-background:#dcfce7;
-color:#16a34a;
+background: #16a34a;
+color:#dcfce7;
 }
 
 /* INDEFERIDO */
 .status-badge.indeferido{
-background:#fee2e2;
-color:#ef4444;
+background:#ef4444;
+color:#fee2e2;  
 }
 
 /* =========================

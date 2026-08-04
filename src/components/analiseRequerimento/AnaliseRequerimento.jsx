@@ -104,9 +104,8 @@ export default function AnaliseRequerimento() {
   }
 
   const finalizado = [
-    "DEFERIDO",
-    "INDEFERIDO",
-    "CANCELADO",
+    "Deferido",
+    "Indeferido",
   ].includes(requerimento.status);
 
   return (
@@ -308,7 +307,7 @@ export default function AnaliseRequerimento() {
                     className="btn-decisao btn-deferir"
                     onClick={() =>
                       atualizarStatus(
-                        "DEFERIDO"
+                        "Deferido"
                       )
                     }
                   >
@@ -322,7 +321,7 @@ export default function AnaliseRequerimento() {
                     className="btn-decisao btn-ajuste"
                     onClick={() =>
                       atualizarStatus(
-                        "AGUARDANDO_AJUSTE"
+                        "Aguardando Ajuste"
                       )
                     }
                   >
@@ -336,7 +335,7 @@ export default function AnaliseRequerimento() {
                     className="btn-decisao btn-indeferir"
                     onClick={() =>
                       atualizarStatus(
-                        "INDEFERIDO"
+                        "Indeferido"
                       )
                     }
                   >

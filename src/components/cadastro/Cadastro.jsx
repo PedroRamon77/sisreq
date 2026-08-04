@@ -46,16 +46,27 @@ export default function Cadastro() {
     return 'ADMIN'
   }
 
+  const [modal, setModal] = useState({
+  aberto: false,
+  titulo: "",
+  mensagem: "",
+  tipo: "erro",
+  });
+
   const handleSubmit = async (e) => {
     e?.preventDefault()
 
     if (loading) return
 
     if (senha !== confirmarSenha) {
-      alert('As senhas não coincidem')
-      return
-    }
-
+    setModal({
+    aberto: true,
+    titulo: "Senhas diferentes",
+    mensagem: "As senhas digitadas não coincidem.",
+    tipo: "erro",
+    });
+  return;
+}
     try {
       setLoading(true)
 
@@ -67,11 +78,22 @@ export default function Cadastro() {
         matricula,
       })
 
-      alert(response.data.mensagem || 'Usuário cadastrado com sucesso')
-
-      navigate('/')
+      setModal({
+        aberto: true,
+        titulo: "Cadastro realizado",
+        mensagem:
+        response.data.mensagem || "Usuário cadastrado com sucesso.",
+        tipo: "sucesso",
+});
     } catch (error) {
-      alert(error.response?.data?.erro || 'Erro ao cadastrar')
+      setModal({
+        aberto: true,
+        titulo: "Falha no cadastro",
+        mensagem:
+        error.response?.data?.erro ||
+        "Não foi possível realizar o cadastro.",
+        tipo: "erro",
+});
     } finally {
       setLoading(false)
     }
@@ -179,41 +201,6 @@ export default function Cadastro() {
             </div>
 
             <div className="input-group">
-              <label>Tipo de perfil</label>
-
-              <div className="perfil-options">
-
-                <label>
-                  <input
-                    type="radio"
-                    checked={tipoPerfil === 'aluno'}
-                    onChange={() => setTipoPerfil('aluno')}
-                  />
-                  Aluno
-                </label>
-
-                <label>
-                  <input
-                    type="radio"
-                    checked={tipoPerfil === 'administrativo'}
-                    onChange={() => setTipoPerfil('administrativo')}
-                  />
-                  Administrativo
-                </label>
-
-                <label>
-                  <input
-                    type="radio"
-                    checked={tipoPerfil === 'servidor'}
-                    onChange={() => setTipoPerfil('servidor')}
-                  />
-                  Servidor
-                </label>
-
-              </div>
-            </div>
-
-            <div className="input-group">
               <label>Matrícula</label>
 
               <div className="input-wrapper">
@@ -249,6 +236,47 @@ export default function Cadastro() {
           </div>
         </div>
       </section>
+
+      {modal.aberto && (
+  <div
+    className="modal-overlay"
+    onClick={() =>
+      setModal({
+        ...modal,
+        aberto: false,
+      })
+    }
+  >
+    <div
+      className="modal-login"
+      onClick={(e) => e.stopPropagation()}
+    >
+      <div className={`modal-icon ${modal.tipo}`}>
+        {modal.tipo === "erro" ? "✕" : "✓"}
+      </div>
+
+      <h3>{modal.titulo}</h3>
+
+      <p>{modal.mensagem}</p>
+
+      <button
+        className="modal-button"
+        onClick={() => {
+          setModal({
+            ...modal,
+            aberto: false,
+          });
+
+          if (modal.tipo === "sucesso") {
+            navigate("/");
+          }
+        }}
+      >
+        Fechar
+      </button>
+    </div>
+  </div>
+)}
     </main>
   )
 }

@@ -30,6 +30,12 @@ export default function Login() {
   const [password, setPassword] = useState('')
   const [showPassword, setShowPassword] = useState(false)
   const [loading, setLoading] = useState(false)
+  const [modal, setModal] = useState({
+  aberto: false,
+  titulo: "",
+  mensagem: "",
+  tipo: "erro"
+})
 
   const navigate = useNavigate()
 
@@ -68,10 +74,14 @@ export default function Login() {
     }
 
   } catch (error) {
-    alert(
-      error.response?.data?.erro ||
-      'Erro ao fazer login'
-    )
+    setModal({
+      aberto: true,
+      titulo: "Falha no login",
+      mensagem:
+        error.response?.data?.erro ||
+        "E-mail ou senha inválidos.",
+      tipo: "erro"
+})
   } finally {
     setLoading(false)
   }
@@ -182,6 +192,45 @@ export default function Login() {
           </p>
         </div>
       </section>
+
+      {modal.aberto && (
+  <div
+    className="modal-overlay"
+    onClick={() =>
+      setModal({
+        ...modal,
+        aberto: false
+      })
+    }
+  >
+    <div
+      className="modal-login"
+      onClick={(e) => e.stopPropagation()}
+    >
+
+      <div className={`modal-icon ${modal.tipo}`}>
+        {modal.tipo === "erro" ? "✕" : "✓"}
+      </div>
+
+      <h3>{modal.titulo}</h3>
+
+      <p>{modal.mensagem}</p>
+
+      <button
+        className="modal-button"
+        onClick={() =>
+          setModal({
+            ...modal,
+            aberto: false
+          })
+        }
+      >
+        Fechar
+      </button>
+
+    </div>
+  </div>
+  )}
     </main>
   )
 }
