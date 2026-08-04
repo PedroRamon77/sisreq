@@ -36,6 +36,7 @@ export default function NovoRequerimento() {
   const [descricao, setDescricao] = useState("");
   const [anexo, setAnexo] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [modalSucesso, setModalSucesso] = useState(false);
 
   const usuario = JSON.parse(localStorage.getItem("usuario"));
 
@@ -66,8 +67,12 @@ export default function NovoRequerimento() {
         }
       });
 
-      alert("Requerimento enviado com sucesso!");
-      navigate("/dashboardaluno");
+    setCurso("");
+    setTipo("");
+    setDescricao("");
+    setAnexo(null);
+
+    setModalSucesso(true);
     } catch (error) {
       alert(
         error.response?.data?.erro ||
@@ -257,6 +262,26 @@ export default function NovoRequerimento() {
           </div>
         </form>
       </div>
+{modalSucesso && (
+  <div className="modal-overlay">
+    <div className="modal">
+      <div className="modal-icon-success">✓</div>
+
+      <h2>Requerimento enviado!</h2>
+
+      <button
+        type="button"
+        className="btn-enviar"
+        onClick={() => {
+          setModalSucesso(false);
+          navigate("/dashboardaluno");
+        }}
+      >
+        Voltar ao painel
+      </button>
+    </div>
+  </div>
+)}
     </div>
   );
 }

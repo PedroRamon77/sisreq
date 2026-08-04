@@ -247,6 +247,69 @@ cursor:not-allowed;
 box-shadow:none;
 }
 
+.modal-overlay{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,.5);
+display:flex;
+align-items:center;
+justify-content:center;
+z-index:9999;
+}
+
+.modal{
+width:420px;
+max-width:90%;
+background:#fff;
+padding:30px;
+border-radius:16px;
+box-shadow:0 20px 50px rgba(0,0,0,.2);
+text-align:center;
+animation:modalFade .25s ease;
+}
+
+.modal h2{
+margin:15px 0 10px;
+color:#15803d;
+}
+
+.modal p{
+margin-bottom:20px;
+color:#555;
+}
+
+.modal-icon-success{
+width:70px;
+height:70px;
+margin:auto;
+border-radius:50%;
+background:#16a34a;
+color:#fff;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:38px;
+font-weight:bold;
+}
+
+.modal .btn-enviar{
+width:100%;
+}
+
+@keyframes modalFade{
+from{
+opacity:0;
+transform:scale(.9);
+}
+to{
+opacity:1;
+transform:scale(1);
+}
+}
+
 @media(max-width:992px){
 
 .form-grid{
