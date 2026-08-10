@@ -79,9 +79,6 @@ export default function Dashboard() {
             <p>
               Usuário logado: <strong>{nome}</strong>
             </p>
-            <p>
-              Perfil: <strong>{tipo}</strong>
-            </p>
           </div>
 
           <Link to="/novorequerimento" className="btn-novo">
@@ -95,15 +92,7 @@ export default function Dashboard() {
             <span className="status-number">{dados.abertos}</span>
           </div>
 
-          <div className="status-card">
-            <span className="status-label">Em Análise</span>
-            <span className="status-number">{dados.emAnalise}</span>
-          </div>
-
-          <div className="status-card">
-            <span className="status-label">Finalizados</span>
-            <span className="status-number">{dados.finalizados}</span>
-          </div>
+          
         </section>
 
         <section className="notifications-section">
