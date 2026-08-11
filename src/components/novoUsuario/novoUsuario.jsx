@@ -135,10 +135,6 @@ export default function NovoUsuario() {
                   Aluno
                 </option>
 
-                <option value="SERVIDOR">
-                  Servidor
-                </option>
-
                 <option value="ADMIN">
                   Administrador
                 </option>

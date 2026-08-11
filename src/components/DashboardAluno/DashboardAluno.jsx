@@ -88,7 +88,7 @@ export default function Dashboard() {
 
         <section className="status-grid">
           <div className="status-card">
-            <span className="status-label">Abertos</span>
+            <span className="status-label">Requerimentos Ativos</span>
             <span className="status-number">{dados.abertos}</span>
           </div>
 

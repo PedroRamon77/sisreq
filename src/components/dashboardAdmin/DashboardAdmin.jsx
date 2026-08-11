@@ -6,7 +6,6 @@ import SidebarAdmin from '../layout/sidebar/SidebarAdmin'
 
 export default function DashboardAdmin() {
   const navigate = useNavigate()
-
   const [loading, setLoading] = useState(true)
 
   const [dados, setDados] = useState({
@@ -24,11 +23,9 @@ export default function DashboardAdmin() {
   async function carregarDashboard() {
     try {
       const response = await api.get('/dashboard/admin')
-
       setDados(response.data)
     } catch (error) {
       console.error(error)
-
       alert('Erro ao carregar dashboard')
     } finally {
       setLoading(false)
@@ -49,46 +46,24 @@ export default function DashboardAdmin() {
 
   return (
     <div className="dashboard-container">
-
       <SidebarAdmin itemAtivo="visao-geral" />
 
       <main className="main-content admin-content">
-
         <header className="admin-header">
           <div className="admin-title-group">
             <h2>Painel Administrativo</h2>
-            <p>Visão geral de acessos e requerimentos</p>
-          </div>
-
-          <div className="admin-profile">
-            <div className="admin-info">
-              <strong>Administrador</strong>
-              <span>SisReq</span>
-            </div>
-
-            <div className="admin-avatar-glow"></div>
+            <p>Visão geral de usuarios e requerimentos</p>
           </div>
         </header>
 
         <section className="admin-cards-grid">
-
           <div className="admin-card outline-green">
             <span className="admin-card-label">
-              TOTAL DE ALUNOS
+              TOTAL DE USUARIOS
             </span>
 
             <span className="admin-card-value text-green">
               {dados.totalAlunos}
-            </span>
-          </div>
-
-          <div className="admin-card outline-gray">
-            <span className="admin-card-label">
-              SERVIDORES CADASTRADOS
-            </span>
-
-            <span className="admin-card-value text-green">
-              {dados.totalServidores}
             </span>
           </div>
 
@@ -101,21 +76,15 @@ export default function DashboardAdmin() {
               {dados.totalPendencias}
             </span>
           </div>
-
         </section>
 
         <section className="admin-table-section">
-
           <div className="table-header">
-            <h3>
-              Pendências de Requerimentos
-            </h3>
+            <h3>Pendências de Requerimentos</h3>
           </div>
 
           <div className="table-container">
-
             <table className="admin-table">
-
               <thead>
                 <tr>
                   <th>Aluno</th>
@@ -127,7 +96,6 @@ export default function DashboardAdmin() {
               </thead>
 
               <tbody>
-
                 {dados.pendencias.length === 0 ? (
                   <tr>
                     <td colSpan="5">
@@ -137,7 +105,6 @@ export default function DashboardAdmin() {
                 ) : (
                   dados.pendencias.map((item) => (
                     <tr key={item.id}>
-
                       <td>
                         <strong>
                           {item.usuario?.nome}
@@ -162,13 +129,13 @@ export default function DashboardAdmin() {
 
                       <td>
                         <button
-                          className="btn-action btn-gray"
+                          className="btn-action btn-light-green"
                           onClick={() =>
                             navigate(
                               `/analiserequerimento/${item.id}`,
                               {
                                 state: {
-                                  origem: "dashboard-admin",
+                                  origem: 'dashboard-admin',
                                 },
                               }
                             )
@@ -177,26 +144,17 @@ export default function DashboardAdmin() {
                           Analisar
                         </button>
                       </td>
-
                     </tr>
                   ))
                 )}
-
               </tbody>
-
             </table>
-
           </div>
-
         </section>
 
         <section className="admin-table-section">
-
           <div className="table-header flex-between">
-
-            <h3>
-              Controle de Acessos
-            </h3>
+            <h3>Controle de Acessos</h3>
 
             <button
               className="btn-gerenciar"
@@ -206,13 +164,10 @@ export default function DashboardAdmin() {
             >
               Gerenciar usuários +
             </button>
-
           </div>
 
           <div className="table-container">
-
             <table className="admin-table">
-
               <thead>
                 <tr>
                   <th>Nome</th>
@@ -222,10 +177,8 @@ export default function DashboardAdmin() {
               </thead>
 
               <tbody>
-
                 {dados.acessos.map((item) => (
                   <tr key={item.id}>
-
                     <td>
                       <strong>
                         {item.nome}
@@ -241,20 +194,13 @@ export default function DashboardAdmin() {
                         ? 'Ativo'
                         : 'Bloqueado'}
                     </td>
-
                   </tr>
                 ))}
-
               </tbody>
-
             </table>
-
           </div>
-
         </section>
-
       </main>
-
     </div>
   )
 }

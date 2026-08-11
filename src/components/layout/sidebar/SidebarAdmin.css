@@ -29,35 +29,31 @@
 }
 
 .nav-item {
-  padding: 12px 20px;
-  border-radius: 8px;
-  text-decoration: none;
-  font-size: 0.95rem;
-  font-weight: 700;
-  color: #15803d;
-  background: transparent;
-  border: none;
-  text-align: left;
-  cursor: pointer;
-  transition: all 0.2s ease;
+padding:12px 20px;
+border-radius:8px;
+text-decoration:none;
+font-size:0.95rem;
+font-weight:700;
+color:#15803d;
+background:transparent;
+border:none;  
+text-align:left;
+cursor:pointer;
+transition:all 0.2s ease;
 }
-
 .nav-item.active {
-  background: #16a34a;
-  color: #ffffff;
+background:#16a34a;
+color:#fdfdfd;
 }
-
 .nav-item:hover:not(.active):not(.logout) {
-  background: #f0fdf4;
+background:#f0fdf4;
 }
-
 .nav-item.logout {
-  color: #ef4444; 
-  margin-top: 15px;
+color:#ef4444;
+margin-top:15px;
 }
-
 .nav-item.logout:hover {
-  background: #fef2f2;
+background:#fef2f2;
 }
 
 /* Responsividade do Menu */

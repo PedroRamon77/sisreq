@@ -1,349 +1,288 @@
-/* =========================
-   REUTILIZAÇÃO DA ESTRUTURA BASE (SIDEBAR)
-========================= */
 .dashboard-container {
-  display: flex;
-  min-height: 100vh;
-  background: #ffffff;
-  font-family: 'Inter', sans-serif;
-  color: #111827;
+display:flex;
+min-height:100vh;
+background:#fdfdfd;
+font-family:'Inter',sans-serif;
+color:#111827;
 }
-
 .sidebar {
-  width: 270px;
-  background: #fdfdfd;
-  border-right: 1px solid #e5e7eb;
-  padding: 40px 20px;
-  display: flex;
-  flex-direction: column;
+width:270px;
+background:#fdfdfd;
+border-right:1px solid #e5e7eb;
+padding:40px 20px;
+display:flex;
+flex-direction:column;
 }
-
 .sidebar-logo h1 {
-  font-size: 2.2rem;
-  font-weight: 800;
-  color: #16a34a; 
-  margin-bottom: 50px;
-  padding-left: 10px;
+font-size:2.2rem;
+font-weight:800;
+color:#16a34a;
+margin-bottom:50px;
+padding-left:10px;
 }
-
 .sidebar-logo h1 span {
-  color: #22c55e;
+color:#22c55e;
 }
-
 .sidebar-nav {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
+display:flex;
+flex-direction:column;
+gap:12px;
 }
-
 .nav-item {
-  padding: 12px 20px;
-  border-radius: 8px;
-  text-decoration: none;
-  font-size: 0.95rem;
-  font-weight: 700;
-  color: #15803d; /* Verde escuro elegante */
-  background: transparent;
-  border: none;
-  text-align: left;
-  cursor: pointer;
-  transition: all 0.2s ease;
+padding:12px 20px;
+border-radius:8px;
+text-decoration:none;
+font-size:0.95rem;
+font-weight:700;
+color:#15803d;
+background:transparent;
+border:none;
+text-align:left;
+cursor:pointer;
+transition:all 0.2s ease;
 }
-
 .nav-item.active {
-  background: #16a34a; /* Fundo principal */
-  color: #ffffff;
+background:#16a34a;
+color:#fdfdfd;
 }
-
 .nav-item:hover:not(.active):not(.logout) {
-  background: #f0fdf4; /* Verde bem clarinho para hover */
+background:#f0fdf4;
 }
-
 .nav-item.logout {
-  color: #ef4444; 
-  margin-top: 15px;
+color:#ef4444;
+margin-top:15px;
 }
-
 .nav-item.logout:hover {
-  background: #fef2f2;
+background:#fef2f2;
 }
-
-/* =========================
-   MAIN CONTENT ADMIN
-========================= */
 .admin-content {
-  flex: 1;
-  padding: 50px 60px;
-  background: #ffffff;
+flex:1;
+padding:50px 60px;
+background:#fdfdfd;
 }
-
-/* =========================
-   CABEÇALHO
-========================= */
 .admin-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 40px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:40px;
 }
-
 .admin-title-group h2 {
-  font-size: 2.2rem;
-  font-weight: 800;
-  color: #16a34a; /* Verde principal */
-  margin-bottom: 5px;
+font-size:2.2rem;
+font-weight:800;
+color:#16a34a;
+margin-bottom:5px;
 }
-
 .admin-title-group p {
-  color: #22c55e; /* Verde secundário, mais suave que o neon */
-  font-weight: 600;
-  font-size: 1rem;
+color:#22c55e;
+font-weight:600;
+font-size:1rem;
 }
-
 .admin-profile {
-  display: flex;
-  align-items: center;
-  gap: 15px;
+display:flex;
+align-items:center;
+gap:15px;
 }
-
 .admin-info {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
+display:flex;
+flex-direction:column;
+align-items:flex-end;
 }
-
 .admin-info strong {
-  color: #16a34a;
-  font-size: 1.1rem;
+color:#16a34a;
+font-size:1.1rem;
 }
-
 .admin-info span {
-  color: #22c55e;
-  font-weight: 600;
-  font-size: 0.9rem;
+color:#22c55e;
+font-weight:600;
+font-size:0.9rem;
 }
-
 .admin-avatar-glow {
-  width: 70px;
-  height: 70px;
-  border-radius: 50%;
-  border: 3px solid #22c55e;
-  background: transparent;
-  /* Brilho suave, nada neon */
-  box-shadow: 0 0 15px rgba(34, 197, 94, 0.2); 
+width:70px;
+height:70px;
+border-radius:50%;
+border:3px solid #22c55e;
+background:transparent;
+box-shadow:0 0 15px rgba(34,197,94,0.2);
 }
-
-/* =========================
-   CARDS GRID
-========================= */
 .admin-cards-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 25px;
-  margin-bottom: 50px;
+display:grid;
+grid-template-columns:repeat(2,minmax(0,1fr));
+gap:25px;
+margin-bottom:50px;
 }
-
 .admin-card {
-  padding: 30px;
-  border-radius: 12px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  background: #ffffff;
+width:100%;
+min-height:200px;
+padding:30px;
+border-radius:12px;
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+gap:10px;
+background:#fdfdfd;
 }
-
 .admin-card-label {
-  font-size: 0.85rem;
-  font-weight: 800;
-  color: #15803d; /* Textos esverdeados escuros */
+font-size:0.85rem;
+font-weight:800;
+color:#15803d;
 }
-
 .admin-card-value {
-  font-size: 4.5rem;
-  font-weight: 800;
-  line-height: 1;
+font-size:4.5rem;
+font-weight:800;
+line-height:1;
 }
-
-/* Variações de Cards */
-.outline-green { border: 1px solid #16a34a; }
-.outline-gray { border: 1px solid #16a34a; }
-.outline-red { border: 1px solid #ef4444; }
-
-.text-green { color: #16a34a; }
-.text-red { color: #ef4444 !important; }
-
-/* =========================
-   TABELAS E SEÇÕES
-========================= */
+.outline-green {
+border:1px solid #16a34a;
+}
+.outline-red {
+border:1px solid #ef4444;
+}
+.text-green {
+color:#16a34a;
+}
+.text-red {
+color:#ef4444 !important;
+}
 .admin-table-section {
-  border: 1px solid #16a34a;
-  border-radius: 24px;
-  margin-bottom: 40px;
-  overflow: hidden;
-  background: #f8fafc; /* Um cinza/azulado beeeem sutil */
+border:1px solid #16a34a;
+border-radius:24px;
+margin-bottom:40px;
+overflow:hidden;
+background:#f8fafc;
 }
-
 .table-header {
-  padding: 20px 30px;
-  border-bottom: 1px solid #d1d5db;
+padding:20px 30px;
+border-bottom:1px solid #d1d5db;
 }
-
 .table-header h3 {
-  font-size: 1.2rem;
-  font-weight: 800;
-  color: #16a34a;
+font-size:1.2rem;
+font-weight:800;
+color:#16a34a;
 }
-
 .table-header.flex-between {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+display:flex;
+justify-content:space-between;
+align-items:center;
 }
-
 .btn-gerenciar {
-  background: #16a34a;
-  color: #ffffff;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 20px;
-  font-size: 0.9rem;
-  font-weight: 700;
-  cursor: pointer;
-  transition: background 0.2s ease;
-  box-shadow: 0 4px 12px rgba(22, 163, 74, 0.2);
+background:#16a34a;
+color:#fdfdfd;
+border:none;
+padding:10px 20px;
+border-radius:20px;
+font-size:0.9rem;
+font-weight:700;
+cursor:pointer;
+transition:all 0.2s ease;
+box-shadow:0 4px 12px rgba(22,163,74,0.2);
 }
-
 .btn-gerenciar:hover {
-  background: #15803d;
+background:#15803d;
 }
-
 .table-container {
-  width: 100%;
-  overflow-x: auto;
+width:100%;
+overflow-x:auto;
 }
-
 .admin-table {
-  width: 100%;
-  border-collapse: collapse;
-  text-align: center;
+width:100%;
+border-collapse:collapse;
+text-align:center;
 }
-
 .admin-table th {
-  padding: 15px 10px;
-  font-size: 0.85rem;
-  font-weight: 800;
-  color: #15803d;
-  border-bottom: 1px solid #d1d5db;
+padding:15px 10px;
+font-size:0.85rem;
+font-weight:800;
+color:#15803d;
+border-bottom:1px solid #d1d5db;
 }
-
 .admin-table td {
-  padding: 20px 10px;
-  font-size: 0.9rem;
-  color: #15803d;
-  border-bottom: 1px solid #e5e7eb;
+padding:20px 10px;
+font-size:0.9rem;
+color:#15803d;
+border-bottom:1px solid #e5e7eb;
 }
-
 .admin-table tbody tr:last-child td {
-  border-bottom: none;
+border-bottom:none;
 }
-
-/* =========================
-   BOTÕES E PILLS
-========================= */
 .status-pill {
-  padding: 6px 16px;
-  border-radius: 20px;
-  font-weight: 700;
-  font-size: 0.85rem;
-  display: inline-block;
+padding:6px 16px;
+border-radius:20px;
+font-weight:700;
+font-size:0.85rem;
+display:inline-block;
 }
-
 .status-pill.aprovado {
-  background: #dcfce7;
-  color: #16a34a;
-  border: 1px solid #16a34a;
+background:#dcfce7;
+color:#16a34a;
+border:1px solid #16a34a;
 }
-
 .status-pill.atrasado {
-  background: #fee2e2;
-  color: #ef4444;
-  border: 1px solid #ef4444;
+background:#fee2e2;
+color:#ef4444;
+border:1px solid #ef4444;
 }
-
 .btn-action {
-  padding: 8px 24px;
-  border-radius: 20px;
-  font-weight: 700;
-  font-size: 0.85rem;
-  cursor: pointer;
-  border: 1px solid #9ca3af;
-  transition: all 0.2s ease;
+padding:8px 24px;
+border-radius:20px;
+font-weight:700;
+font-size:0.85rem;
+cursor:pointer;
+border:1px solid #16a34a;
+transition:all 0.2s ease;
 }
-
-.btn-gray {
-  background: #f3f4f6;
-  color: #4b5563;
-  border-color: #d1d5db;
-}
-
-.btn-gray:hover {
-  background: #e5e7eb;
-}
-
 .btn-light-green {
-  background: #dcfce7;
-  color: #16a34a;
-  border-color: #16a34a;
+background:#16a34a;
+color:#fdfdfd;
+border-color:#16a34a;
 }
-
 .btn-light-green:hover {
-  background: #bbf7d0;
+background:#15803d;
+color:#fdfdfd;
+border-color:#15803d;
 }
-
-/* =========================
-   RESPONSIVIDADE
-========================= */
-@media (max-width: 1024px) {
-  .admin-cards-grid {
-    grid-template-columns: 1fr;
-    gap: 15px;
-  }
+@media (max-width:1024px) {
+.admin-cards-grid {
+grid-template-columns:repeat(2,minmax(0,1fr));
+gap:15px;
 }
-
-@media (max-width: 768px) {
-  .dashboard-container {
-    flex-direction: column;
-  }
-  
-  .sidebar {
-    width: 100%;
-    border-right: none;
-    border-bottom: 1px solid #e5e7eb;
-    padding: 25px 20px;
-  }
-  
-  .sidebar-nav {
-    flex-direction: row;
-    flex-wrap: wrap;
-  }
-  
-  .admin-content {
-    padding: 30px 20px;
-  }
-  
-  .admin-header {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 20px;
-  }
-  
-  .admin-profile {
-    align-self: flex-start;
-  }
-  
-  .admin-info {
-    align-items: flex-start;
-  }
+.admin-content {
+padding:40px 30px;
+}
+}
+@media (max-width:768px) {
+.dashboard-container {
+flex-direction:column;
+}
+.sidebar {
+width:100%;
+border-right:none;
+border-bottom:1px solid #e5e7eb;
+padding:25px 20px;
+}
+.sidebar-nav {
+flex-direction:row;
+flex-wrap:wrap;
+}
+.admin-content {
+padding:30px 20px;
+}
+.admin-header {
+flex-direction:column;
+align-items:flex-start;
+gap:20px;
+}
+.admin-profile {
+align-self:flex-start;
+}
+.admin-info {
+align-items:flex-start;
+}
+.admin-cards-grid {
+grid-template-columns:1fr;
+gap:15px;
+}
+.admin-card {
+min-height:180px;
+}
 }

@@ -6,12 +6,6 @@ export default function SidebarAdmin({
 }) {
   const navigate = useNavigate();
 
-  const usuario = JSON.parse(
-    localStorage.getItem("usuario")
-  );
-
-  const tipo = usuario?.tipo;
-
   const handleLogout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("usuario");
@@ -27,59 +21,49 @@ export default function SidebarAdmin({
       </div>
 
       <nav className="sidebar-nav">
+        <Link
+          to="/dashboardAdmin"
+          className={`nav-item ${
+            itemAtivo === "visao-geral"
+              ? "active"
+              : ""
+          }`}
+        >
+          Dashboard Admin
+        </Link>
 
-        {tipo === "SERVIDOR" && (
-          <>
-            <Link
-              to="/dashboardservidor"
-              className={`nav-item ${
-                itemAtivo === "visao-geral"
-                  ? "active"
-                  : ""
-              }`}
-            >
-              Visão Geral
-            </Link>
+        <Link
+          to="/gerenciarUsuarios"
+          className={`nav-item ${
+            itemAtivo === "gerenciar-usuarios"
+              ? "active"
+              : ""
+          }`}
+        >
+          Gerenciar Usuários
+        </Link>
 
-            <Link
-              to="/solicitacoes"
-              className={`nav-item ${
-                itemAtivo === "solicitacoes"
-                  ? "active"
-                  : ""
-              }`}
-            >
-              Solicitações
-            </Link>
-          </>
-        )}
+        <Link
+          to="/gerenciaremails"
+          className={`nav-item ${
+            itemAtivo === "gerenciar-emails"
+              ? "active"
+              : ""
+          }`}
+        >
+          Gerenciar E-mails
+        </Link>
 
-        {tipo === "ADMIN" && (
-          <>
-            <Link
-              to="/dashboardadmin"
-              className={`nav-item ${
-                itemAtivo === "visao-geral"
-                  ? "active"
-                  : ""
-              }`}
-            >
-              Dashboard Admin
-            </Link>
-
-            <Link
-              to="/gerenciarusuarios"
-              className={`nav-item ${
-                itemAtivo ===
-                "gerenciar-usuarios"
-                  ? "active"
-                  : ""
-              }`}
-            >
-              Gerenciar Usuários
-            </Link>
-          </>
-        )}
+        <Link
+          to="/solicitacoes"
+          className={`nav-item ${
+            itemAtivo === "solicitacoes"
+              ? "active"
+              : ""
+          }`}
+        >
+          Solicitações
+        </Link>
 
         <button
           className="nav-item logout"

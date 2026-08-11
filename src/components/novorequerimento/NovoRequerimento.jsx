@@ -91,7 +91,7 @@ export default function NovoRequerimento() {
           className="back-button"
         >
           <span className="back-arrow">←</span>
-          <span>Voltar ao Painel</span>
+          <span>Voltar</span>
         </Link>
       </div>
 

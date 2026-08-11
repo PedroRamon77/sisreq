@@ -52,7 +52,7 @@ export default function SidebarAluno({
               : ""
           }`}
         >
-          Historico de Solicitações
+          Histórico de Solicitações
         </Link>
 
         <button

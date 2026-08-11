@@ -4,7 +4,7 @@
 
 .novo-usuario-page {
   min-height: 100vh;
-  background: #f5f7fb;
+  background: #fdfdfd;
   font-family: 'Inter', sans-serif;
   color: #111827;
 
@@ -20,6 +20,7 @@
   margin: 0 auto;
 
   background: #ffffff;
+  border: 2px solid #16a34a;
   border-radius: 28px;
 
   padding: 32px;
@@ -37,8 +38,7 @@
 
   width: 6px;
   height: 100%;
-
-  background: #16a34a;
+  
 }
 
 /* =========================
@@ -121,6 +121,7 @@
 .form-group input:focus,
 .form-group select:focus {
   background: #16a34a15;
+  border: 1px solid #16a34a;
 }
 
 .form-group select {

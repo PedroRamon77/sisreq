@@ -5,7 +5,7 @@
 .main-content {
   flex: 1;
   padding: 50px 60px;
-  background: #ffffff;
+  background: #fdfdfd;
 }
 
 /* =========================
@@ -63,7 +63,7 @@
 }
 
 .status-card {
-  background: #ffffff;
+  background: #fdfdfd;
   border: 1px solid #16a34a;
   border-radius: 12px;
 
