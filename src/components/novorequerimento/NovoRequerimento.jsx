@@ -138,27 +138,51 @@ export default function NovoRequerimento() {
               </label>
 
               <select
-                className="select"
-                value={curso}
-                onChange={(e) => setCurso(e.target.value)}
-                required
-              >
-                <option value="">
-                  Selecione o curso
-                </option>
+  className="select"
+  value={curso}
+  onChange={(e) => setCurso(e.target.value)}
+  required
+>
+  <option value="">
+    Selecione o curso
+  </option>
 
-                <option>
-                  Bacharelado em Sistemas de Informação
-                </option>
+  <option>
+    Bacharelado em Sistemas de Informação
+  </option>
 
-                <option>
-                  Engenharia Elétrica
-                </option>
+  <option>
+    Engenharia Elétrica
+  </option>
 
-                <option>
-                  Engenharia Mecânica
-                </option>
-              </select>
+  <option>
+    Engenharia Mecânica
+  </option>
+
+  <option>
+    Licenciatura em Física
+  </option>
+
+  <option>
+    Licenciatura em Matemática
+  </option>
+
+  <option>
+    Tecnólogo em Mecatrônica Industrial
+  </option>
+
+  <option>
+    Integrado em Informática
+  </option>
+
+  <option>
+    Integrado em Mecânica
+  </option>
+
+  <option>
+    Integrado em Eletrotécnica
+  </option>
+</select>
             </div>
 
             <div className="input-group full">

@@ -9,118 +9,88 @@ import "./AnaliseRequerimento.css";
 export default function AnaliseRequerimento() {
   const navigate = useNavigate();
   const { id } = useParams();
-  const usuario = JSON.parse(localStorage.getItem("usuario"));
-  const podeEncaminhar = usuario?.tipo === "ADMIN";
-  const [requerimento, setRequerimento] = useState(null);
-  const [emails, setEmails] = useState([]);
-  const [emailSelecionado, setEmailSelecionado] = useState("");
-  const [encaminhando, setEncaminhando] = useState(false);
-  const [mensagem, setMensagem] = useState("");
-  const [tipoMensagem, setTipoMensagem] = useState("");
-  const [modalMensagem, setModalMensagem] = useState(false);
+
+  const usuario = JSON.parse(
+    localStorage.getItem("usuario")
+  );
+
+  const podeEncaminhar =
+    usuario?.tipo === "ADMIN";
+
+  const [requerimento, setRequerimento] =
+    useState(null);
+
+  const [encaminhando, setEncaminhando] =
+    useState(false);
+
+  const [mensagem, setMensagem] =
+    useState("");
+
+  const [tipoMensagem, setTipoMensagem] =
+    useState("");
+
+  const [modalMensagem, setModalMensagem] =
+    useState(false);
+
+  // =========================
+  // CARREGAR REQUERIMENTO
+  // =========================
 
   useEffect(() => {
     carregarRequerimento();
-    carregarEmails();
   }, [id]);
 
   async function carregarRequerimento() {
     try {
-      const response = await api.get(`/requerimentos/${id}`);
+      const response = await api.get(
+        `/requerimentos/${id}`
+      );
+
       setRequerimento(response.data);
     } catch (error) {
-      console.error("Erro ao carregar requerimento:", error);
+      console.error(
+        "Erro ao carregar requerimento:",
+        error
+      );
+
       mostrarMensagem(
-        error.response?.data?.erro || "Erro ao carregar requerimento.",
+        error.response?.data?.erro ||
+          "Erro ao carregar requerimento.",
         "erro"
       );
     }
   }
 
-  function carregarEmails() {
-    const dadosSalvos = localStorage.getItem("destinatariosEncaminhamento");
-
-    if (!dadosSalvos) {
-      setEmails([]);
-      return;
-    }
-
-    try {
-      const lista = JSON.parse(dadosSalvos);
-
-      const emailsAtivos = Array.isArray(lista)
-        ? lista.filter((item) => item.ativo)
-        : [];
-
-      setEmails(emailsAtivos);
-
-      const emailPadrao = emailsAtivos.find((item) => item.padrao);
-
-      if (emailPadrao) {
-        setEmailSelecionado(String(emailPadrao.id));
-      }
-    } catch (error) {
-      console.error("Erro ao carregar destinatários:", error);
-      setEmails([]);
-    }
-  }
+  // =========================
+  // ENCAMINHAR REQUERIMENTO
+  // =========================
 
   async function encaminharRequerimento() {
-    if (!emailSelecionado) {
-      mostrarMensagem(
-        "Selecione um destinatário antes de encaminhar o requerimento.",
-        "erro"
-      );
-      return;
-    }
-
-    const destinatario = emails.find(
-      (item) => String(item.id) === String(emailSelecionado)
-    );
-
-    if (!destinatario) {
-      mostrarMensagem(
-        "O destinatário selecionado não está disponível.",
-        "erro"
-      );
-      return;
-    }
-
     try {
       setEncaminhando(true);
 
-      /*
-       * Quando o endpoint estiver implementado no backend,
-       * substitua o bloco abaixo pela chamada da API.
-       *
-       * Exemplo:
-       *
-       * await api.patch(
-       *   `/requerimentos/${id}/encaminhar`,
-       *   {
-       *     email: destinatario.email
-       *   }
-       * );
-       */
+      const response = await api.patch(
+        `/requerimentos/${id}/status`,
+        {
+          status: "ENCAMINHADO",
+        }
+      );
 
-      await new Promise((resolve) => setTimeout(resolve, 500));
-
-      setRequerimento((atual) => ({
-        ...atual,
-        status: "Encaminhado",
-        emailEncaminhamento: destinatario.email,
-        destinatarioEncaminhamento: destinatario.nome
-      }));
+      setRequerimento(response.data);
 
       mostrarMensagem(
-        `Requerimento encaminhado para ${destinatario.email}.`,
+        "Requerimento encaminhado com sucesso.",
         "sucesso"
       );
     } catch (error) {
-      console.error("Erro ao encaminhar requerimento:", error);
+      console.error(
+        "Erro ao encaminhar requerimento:",
+        error
+      );
 
       mostrarMensagem(
-        error.response?.data?.erro || "Erro ao encaminhar requerimento.",
+        error.response?.data?.erro ||
+          "Erro ao encaminhar requerimento.",
         "erro"
       );
     } finally {
@@ -128,7 +98,14 @@ export default function AnaliseRequerimento() {
     }
   }
 
-  function mostrarMensagem(texto, tipo) {
+  // =========================
+  // MENSAGEM
+  // =========================
+
+  function mostrarMensagem(
+    texto,
+    tipo
+  ) {
     setMensagem(texto);
     setTipoMensagem(tipo);
     setModalMensagem(true);
@@ -140,31 +117,70 @@ export default function AnaliseRequerimento() {
     setTipoMensagem("");
   }
 
+  // =========================
+  // SIDEBAR
+  // =========================
+
   function renderSidebar() {
     if (usuario?.tipo === "ADMIN") {
-      return <SidebarAdmin itemAtivo="solicitacoes" />;
+      return (
+        <SidebarAdmin
+          itemAtivo="solicitacoes"
+        />
+      );
     }
 
     if (usuario?.tipo === "SERVIDOR") {
-      return <SidebarServidor itemAtivo="solicitacoes" />;
+      return (
+        <SidebarServidor
+          itemAtivo="solicitacoes"
+        />
+      );
     }
 
-    return <SidebarAluno itemAtivo="solicitacoes" />;
+    return (
+      <SidebarAluno
+        itemAtivo="solicitacoes"
+      />
+    );
   }
+
+  // =========================
+  // FORMATAR DATA
+  // =========================
 
   function formatarData(data) {
     if (!data) {
       return "-";
     }
 
-    const dataFormatada = new Date(data);
+    const dataFormatada =
+      new Date(data);
 
-    if (Number.isNaN(dataFormatada.getTime())) {
+    if (
+      Number.isNaN(
+        dataFormatada.getTime()
+      )
+    ) {
       return "-";
     }
 
-    return dataFormatada.toLocaleDateString("pt-BR");
+    return dataFormatada.toLocaleDateString(
+      "pt-BR"
+    );
   }
+
+  // =========================
+  // STATUS
+  // =========================
+
+  const encaminhado =
+    requerimento?.status ===
+    "ENCAMINHADO";
+
+  // =========================
+  // CARREGANDO
+  // =========================
 
   if (!requerimento) {
     return (
@@ -178,52 +194,79 @@ export default function AnaliseRequerimento() {
     );
   }
 
-  const encaminhado = requerimento.status === "Encaminhado";
-
-  const destinatarioAtual = emails.find(
-    (item) => item.email === requerimento.emailEncaminhamento
-  );
+  // =========================
+  // TELA
+  // =========================
 
   return (
     <div className="dashboard-container">
       {renderSidebar()}
 
       <main className="admin-content">
+
+        {/* =========================
+            CABEÇALHO
+        ========================= */}
+
         <header className="analise-header">
+
           <button
             type="button"
             className="btn-voltar"
-            onClick={() => navigate("/solicitacoes")}
+            onClick={() =>
+              navigate("/solicitacoes")
+            }
           >
             ← Voltar
           </button>
 
           <div className="analise-title-group">
+
             <h2>
               {podeEncaminhar
                 ? "Encaminhar Requerimento"
                 : "Detalhes do Requerimento"}
 
-              <span> {requerimento.protocolo}</span>
+              <span>
+                {" "}
+                {requerimento.protocolo}
+              </span>
             </h2>
 
             <p>
-              Revise as informações do requerimento antes do encaminhamento.
+              Revise as informações do requerimento
+              antes do encaminhamento.
             </p>
+
           </div>
         </header>
 
+        {/* =========================
+            GRID PRINCIPAL
+        ========================= */}
+
         <div className="analise-grid">
+
+          {/* =========================
+              COLUNA ESQUERDA
+          ========================= */}
+
           <div>
+
+            {/* DADOS DO ALUNO */}
+
             <section className="info-section">
+
               <h3>Dados do Aluno</h3>
 
               <div className="info-grid">
+
                 <div className="info-box">
                   <label>Nome</label>
 
                   <p>
-                    {requerimento.usuario?.nome || "-"}
+                    {requerimento.usuario?.nome ||
+                      "-"}
                   </p>
                 </div>
 
@@ -231,7 +274,8 @@ export default function AnaliseRequerimento() {
                   <label>Matrícula</label>
 
                   <p>
-                    {requerimento.usuario?.matricula || "-"}
+                    {requerimento.usuario
+                      ?.matricula || "-"}
                   </p>
                 </div>
 
@@ -239,21 +283,31 @@ export default function AnaliseRequerimento() {
                   <label>Curso</label>
 
                   <p>
-                    {requerimento.cursoAtual || "-"}
+                    {requerimento.cursoAtual ||
+                      "-"}
                   </p>
                 </div>
+
               </div>
+
             </section>
 
+            {/* DETALHES DO REQUERIMENTO */}
+
             <section className="info-section">
-              <h3>Detalhes do Requerimento</h3>
+
+              <h3>
+                Detalhes do Requerimento
+              </h3>
 
               <div className="info-grid">
+
                 <div className="info-box">
                   <label>Tipo</label>
 
                   <p>
-                    {requerimento.tipo || "-"}
+                    {requerimento.tipo ||
+                      "-"}
                   </p>
                 </div>
 
@@ -261,7 +315,9 @@ export default function AnaliseRequerimento() {
                   <label>Data</label>
 
                   <p>
-                    {formatarData(requerimento.criadoEm)}
+                    {formatarData(
+                      requerimento.criadoEm
+                    )}
                   </p>
                 </div>
 
@@ -269,6 +325,7 @@ export default function AnaliseRequerimento() {
                   <label>Status</label>
 
                   <p>
+
                     <span
                       className={`status-requerimento ${
                         encaminhado
@@ -276,229 +333,207 @@ export default function AnaliseRequerimento() {
                           : "status-nao-encaminhado"
                       }`}
                     >
-                      {requerimento.status || "Não encaminhado"}
+                      {encaminhado
+                        ? "Encaminhado"
+                        : "Não encaminhado"}
                     </span>
+
                   </p>
                 </div>
+
               </div>
 
               <div className="info-box">
-                <label>Justificativa</label>
+
+                <label>
+                  Justificativa
+                </label>
 
                 <div className="justificativa-box">
+
                   {requerimento.descricao ||
                     "Nenhuma justificativa informada."}
+
                 </div>
+
               </div>
+
             </section>
+
           </div>
 
+          {/* =========================
+              COLUNA DIREITA
+          ========================= */}
+
           <aside>
+
+            {/* DOCUMENTOS */}
+
             <section className="info-section">
+
               <h3>Documentos</h3>
 
               {!requerimento.anexos ||
-              requerimento.anexos.length === 0 ? (
-                <p>Nenhum documento anexado.</p>
+              requerimento.anexos.length ===
+                0 ? (
+                <p>
+                  Nenhum documento anexado.
+                </p>
               ) : (
-                <div className="document-list">
-                  {requerimento.anexos.map((anexo) => (
-                    <div
-                      className="document-card"
-                      key={anexo.id}
-                    >
-                      <span>
-                        {anexo.nomeArquivo || "Documento"}
-                      </span>
 
-                      <a
-                        href={`http://localhost:3000/uploads/${anexo.caminho}`}
-                        target="_blank"
-                        rel="noreferrer"
+                <div className="document-list">
+
+                  {requerimento.anexos.map(
+                    (anexo) => (
+
+                      <div
+                        className="document-card"
+                        key={anexo.id}
                       >
-                        Baixar
-                      </a>
-                    </div>
-                  ))}
+
+                        <span>
+                          {anexo.nomeArquivo ||
+                            "Documento"}
+                        </span>
+
+                        <a
+                          href={`http://localhost:3000/uploads/${anexo.caminho}`}
+                          target="_blank"
+                          rel="noreferrer"
+                        >
+                          Baixar
+                        </a>
+
+                      </div>
+
+                    )
+                  )}
+
                 </div>
+
               )}
+
             </section>
 
+            {/* =========================
+                ENCAMINHAMENTO
+            ========================= */}
+
             {podeEncaminhar && (
+
               <section className="info-section encaminhamento-section">
-                <h3>Encaminhamento</h3>
+
+                <h3>
+                  Encaminhamento
+                </h3>
 
                 {encaminhado ? (
+
                   <div className="encaminhamento-finalizado">
+
                     <div className="encaminhamento-status">
-                      <span>✓</span>
+
+                      <span>
+                        ✓
+                      </span>
 
                       <div>
+
                         <strong>
                           Requerimento encaminhado
                         </strong>
 
                         <p>
-                          O requerimento já foi encaminhado
-                          para o destinatário selecionado.
+                          Este requerimento já foi
+                          encaminhado para análise.
                         </p>
+
                       </div>
+
                     </div>
 
-                    <div className="encaminhamento-dados">
-                      <div>
-                        <label>Destinatário</label>
-
-                        <p>
-                          {requerimento.destinatarioEncaminhamento ||
-                            destinatarioAtual?.nome ||
-                            "-"}
-                        </p>
-                      </div>
-
-                      <div>
-                        <label>E-mail</label>
-
-                        <p>
-                          {requerimento.emailEncaminhamento || "-"}
-                        </p>
-                      </div>
-                    </div>
                   </div>
+
                 ) : (
-                  <>
-                    <div className="form-group-email">
-                      <label htmlFor="emailEncaminhamento">
-                        Destinatário
-                      </label>
 
-                      {emails.length === 0 ? (
-                        <div className="sem-destinatarios">
-                          <strong>
-                            Nenhum destinatário disponível.
-                          </strong>
+                  <button
+                    type="button"
+                    className="btn-encaminhar"
+                    onClick={
+                      encaminharRequerimento
+                    }
+                    disabled={encaminhando}
+                  >
 
-                          <p>
-                            Cadastre e ative um e-mail em
-                            Gerenciar E-mails antes de
-                            encaminhar.
-                          </p>
+                    {encaminhando
+                      ? "Encaminhando..."
+                      : "Encaminhar requerimento"}
 
-                          <button
-                            type="button"
-                            onClick={() =>
-                              navigate("/gerenciaremails")
-                            }
-                          >
-                            Gerenciar e-mails
-                          </button>
-                        </div>
-                      ) : (
-                        <>
-                          <select
-                            id="emailEncaminhamento"
-                            value={emailSelecionado}
-                            onChange={(event) =>
-                              setEmailSelecionado(
-                                event.target.value
-                              )
-                            }
-                          >
-                            <option value="">
-                              Selecione um destinatário
-                            </option>
+                  </button>
 
-                            {emails.map((item) => (
-                              <option
-                                key={item.id}
-                                value={item.id}
-                              >
-                                {item.nome} — {item.email}
-                              </option>
-                            ))}
-                          </select>
-
-                          {emailSelecionado && (
-                            <div className="email-selecionado">
-                              {(() => {
-                                const item = emails.find(
-                                  (email) =>
-                                    String(email.id) ===
-                                    String(emailSelecionado)
-                                );
-
-                                if (!item) {
-                                  return null;
-                                }
-
-                                return (
-                                  <>
-                                    <strong>
-                                      {item.nome}
-                                    </strong>
-
-                                    <span>
-                                      {item.email}
-                                    </span>
-                                  </>
-                                );
-                              })()}
-                            </div>
-                          )}
-                        </>
-                      )}
-                    </div>
-
-                    {emails.length > 0 && (
-                      <button
-                        type="button"
-                        className="btn-encaminhar"
-                        onClick={encaminharRequerimento}
-                        disabled={
-                          encaminhando ||
-                          !emailSelecionado
-                        }
-                      >
-                        {encaminhando
-                          ? "Encaminhando..."
-                          : "Encaminhar requerimento"}
-                      </button>
-                    )}
-                  </>
                 )}
+
               </section>
+
             )}
+
           </aside>
+
         </div>
+
       </main>
 
+      {/* =========================
+          MODAL DE MENSAGEM
+      ========================= */}
+
       {modalMensagem && (
+
         <div className="analise-modal-overlay">
+
           <div
             className={`analise-modal ${tipoMensagem}`}
           >
+
             <div className="analise-modal-icon">
-              {tipoMensagem === "sucesso" ? "✓" : "!"}
+
+              {tipoMensagem ===
+              "sucesso"
+                ? "✓"
+                : "!"}
+
             </div>
 
             <h3>
-              {tipoMensagem === "sucesso"
+
+              {tipoMensagem ===
+              "sucesso"
                 ? "Sucesso"
                 : "Atenção"}
+
             </h3>
 
-            <p>{mensagem}</p>
+            <p>
+              {mensagem}
+            </p>
 
             <button
               type="button"
               className="btn-modal-ok"
-              onClick={fecharMensagem}
+              onClick={
+                fecharMensagem
+              }
             >
               OK
             </button>
+
           </div>
+
         </div>
+
       )}
+
     </div>
   );
 }

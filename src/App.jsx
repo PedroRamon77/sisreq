@@ -84,14 +84,15 @@ export default function App() {
           path="*"
           element={<h1>404 - Página Não Encontrada</h1>}
         />
-        <Route
+        
+        {/*<Route
           path="/gerenciaremails"
           element={
             <ProtectedRoute tiposPermitidos={["ADMIN"]}>
             <GerenciarEmails />
           </ProtectedRoute>
           }
-        />
+        />*/}
       </Routes>
     </BrowserRouter>
   );

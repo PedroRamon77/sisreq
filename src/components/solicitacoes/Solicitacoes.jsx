@@ -18,29 +18,29 @@ export default function Solicitacoes() {
     carregarSolicitacoes();
   }, []);
 
-  async function carregarSolicitacoes() {
-    try {
-      setCarregando(true);
-      const endpoint =
-        usuario?.tipo === "ALUNO"
-          ? "/requerimentos/meus"
-          : "/requerimentos";
-      const response = await api.get(endpoint);
-      setSolicitacoes(
-        Array.isArray(response.data)
-          ? response.data
-          : []
-      );
-    } catch (error) {
-      console.error(
-        "Erro ao carregar solicitações:",
-        error
-      );
-      setSolicitacoes([]);
-    } finally {
-      setCarregando(false);
-    }
+async function carregarSolicitacoes() {
+  try {
+    setCarregando(true);
+
+    const endpoint =
+      usuario?.tipo === "ALUNO"
+        ? "/requerimentos/meus"
+        : "/requerimentos";
+
+    const response = await api.get(endpoint);
+
+    setSolicitacoes(
+      Array.isArray(response.data)
+        ? response.data
+        : []
+    );
+  } catch (error) {
+    console.error("Erro ao carregar solicitações:", error);
+    setSolicitacoes([]);
+  } finally {
+    setCarregando(false);
   }
+}
 
   function voltarDashboard() {
     if (usuario?.tipo === "ADMIN") {
@@ -83,11 +83,20 @@ export default function Solicitacoes() {
       .replace(/[\u0300-\u036f]/g, "");
   }
 
-  function obterStatus(req) {
-    return normalizarTexto(req?.status) === "encaminhado"
-      ? "Encaminhado"
-      : "Não encaminhado";
+function obterStatus(req) {
+  if (req?.status === "ENCAMINHADO") {
+    return "Encaminhado";
   }
+
+  if (
+    req?.status === "ABERTO" ||
+    req?.status === "NAO_ENCAMINHADO"
+  ) {
+    return "Não encaminhado";
+  }
+
+  return "Não encaminhado";
+}
 
   const solicitacoesFiltradas = solicitacoes.filter(
     (req) => {

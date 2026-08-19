@@ -43,7 +43,7 @@ export default function SidebarAdmin({
           Gerenciar Usuários
         </Link>
 
-        <Link
+        {/*<Link
           to="/gerenciaremails"
           className={`nav-item ${
             itemAtivo === "gerenciar-emails"
@@ -52,7 +52,7 @@ export default function SidebarAdmin({
           }`}
         >
           Gerenciar E-mails
-        </Link>
+        </Link>*/}
 
         <Link
           to="/solicitacoes"
